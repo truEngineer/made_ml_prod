@@ -41,9 +41,6 @@ def test_eval_pipeline(
     gen_data.to_csv(input_data_path)
     expected_preds_path = tmpdir.join("heart_preds.csv")
 
-    #del feature_params["age_threshold"]
-    #feature_params["numerical_features"].append("age")
-
     eval_pipeline_params = EvalPipelineParams(
         input_data_path=input_data_path,
         input_model_path="models/model.pkl",

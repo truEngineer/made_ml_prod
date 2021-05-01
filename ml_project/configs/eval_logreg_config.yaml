@@ -17,5 +17,3 @@ feature_params:
     - "chol"
     - "thalach"
     - "oldpeak"
-#age_threshold: 40
-#target_col: "target"
