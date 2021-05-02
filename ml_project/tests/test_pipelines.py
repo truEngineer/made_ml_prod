@@ -39,11 +39,25 @@ def test_eval_pipeline(
 ):
     input_data_path = tmpdir.join("tmp_data.csv")
     gen_data.to_csv(input_data_path)
+    expected_model_path = tmpdir.join("model.pkl")
+
+    train_pipeline_params = TrainPipelineParams(
+        input_data_path=input_data_path,
+        output_model_path=expected_model_path,
+        metric_path=tmpdir.join("metrics.json"),
+        split_params=SplitParams(),
+        feature_params=feature_params_no_thresh,
+        model_params=ModelParams()
+    )
+
+    real_model_path, metrics = train_pipeline(train_pipeline_params)
+    assert real_model_path == expected_model_path
+
     expected_preds_path = tmpdir.join("heart_preds.csv")
 
     eval_pipeline_params = EvalPipelineParams(
         input_data_path=input_data_path,
-        input_model_path="models/model.pkl",
+        input_model_path=real_model_path,
         output_data_path=expected_preds_path,
         feature_params=feature_params_no_thresh,
     )
