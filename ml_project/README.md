@@ -16,9 +16,9 @@
 
 ## User Guide
 
-EDA report generation:
+EDA report generation (`reports` folder):
 
-    python -m src.visualization.eda
+    python generate_report.py
 
 Run tests:
 
