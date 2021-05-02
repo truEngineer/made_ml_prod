@@ -1,6 +1,6 @@
 # ML Project
 
-Installation:  
+## Installation:  
 
     python -m venv .venv
     source .venv/bin/activate
@@ -45,7 +45,7 @@ Run train/eval pipeline:
     │
     ├── reports             <- Generated EDA report files.
     │
-    └── src                 <- Source code for use in this project.
+    ├── src                 <- Source code for use in this project.
     │   │
     │   ├── entities        <- Configuration dataclasses for type checking.
     │   │
@@ -55,7 +55,7 @@ Run train/eval pipeline:
     │   │
     │   ├── models          <- Code to train models and then use trained models to make predictions.
     │
-    └── tests               <- Unit tests for project modules and e2e tests.
+    ├── tests               <- Unit tests for project modules and e2e tests.
     │
     ├── eval_pipeline.py    <- Eval pipeline CLI.
     │
@@ -65,7 +65,7 @@ Run train/eval pipeline:
     │
     ├── requirements.txt    <- The requirements file for reproducing the analysis environment.
     │
-    ├── train_pipeline.py   <- Train pipeline CLI.
+    └── train_pipeline.py   <- Train pipeline CLI.
  
  
 Самооценка (32 балла):
