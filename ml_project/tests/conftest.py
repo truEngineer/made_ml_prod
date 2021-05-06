@@ -17,44 +17,44 @@ from src.features.build_features import (
 )
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def data_path(gen_data: pd.DataFrame) -> str:
     path = os.path.join(os.path.dirname(__file__), "fake_heart.csv")
     gen_data.to_csv(path)
     return path
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def data(data_path: str) -> pd.DataFrame:
     return read_data(data_path)
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def split_params() -> SplitParams:
     return SplitParams(val_size=0.2, random_state=42)
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def target_col() -> str:
     return "target"
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def age_threshold_val() -> int:
     return np.random.randint(40, 70)
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def numerical_features() -> List[str]:
     return ["age", "trestbps", "chol", "thalach", "oldpeak"]
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def categorical_features() -> List[str]:
     return ["sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal"]
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def feature_params(
         categorical_features: List[str],
         numerical_features: List[str],
@@ -70,7 +70,7 @@ def feature_params(
     return params
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def feature_params_no_thresh(
         categorical_features: List[str],
         numerical_features: List[str],
@@ -86,7 +86,7 @@ def feature_params_no_thresh(
     return params
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def features_and_target(
         data_path: str, feature_params: FeatureParams,
 ) -> Tuple[pd.DataFrame, pd.Series]:
@@ -97,7 +97,7 @@ def features_and_target(
     return features, target
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def model(
         features_and_target: Tuple[pd.DataFrame, pd.Series],
 ) -> Classifier:
@@ -105,7 +105,7 @@ def model(
     return train_model(features, target, ModelParams())
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def gen_data():
     size = 100
 
