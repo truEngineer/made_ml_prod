@@ -21,7 +21,6 @@ from src.models import (
     evaluate_model, dump_model,
 )
 
-
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)
 logger.setLevel(logging.INFO)

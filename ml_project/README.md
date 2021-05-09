@@ -2,9 +2,7 @@
 
 ## Installation:  
 
-    python -m venv .venv
-    source .venv/bin/activate
-    pip install -r requirements.txt
+    pip install .
 
 
 ## Dataset
@@ -18,16 +16,16 @@
 
 EDA report generation (`reports` folder):
 
-    python generate_report.py
+    python src/generate_report.py
 
 Run tests:
 
-    pytest -v  tests/
+    pytest -v tests/
 
 Run train/eval pipeline:
 
-    python train_pipeline {train_config_path}
-    python eval_pipeline {eval_config_path}
+    python src/train_pipeline {train_config_path}
+    python src/eval_pipeline {eval_config_path}
 
 
 ## Project Organization
