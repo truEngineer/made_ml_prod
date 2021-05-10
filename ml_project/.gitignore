@@ -1,0 +1,7 @@
+*/.ipynb_checkpoints
+data/preds/*
+models/*
+reports/*
+tests/fake_heart.csv
+
+!.gitkeep
