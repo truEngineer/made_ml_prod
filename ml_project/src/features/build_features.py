@@ -3,11 +3,14 @@ import logging
 
 import numpy as np
 import pandas as pd
+from sklearn.base import (
+    BaseEstimator, TransformerMixin,
+)
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import (
-    Binarizer, OneHotEncoder, StandardScaler,
+    Binarizer, OneHotEncoder,
 )
 
 from src.entities import FeatureParams
@@ -17,6 +20,22 @@ logger = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)
 logger.setLevel(logging.INFO)
 logger.addHandler(handler)
+
+
+class CustomScaler(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        self.mean = None
+        self.std = None
+
+    def fit(self, data: pd.DataFrame):
+        self.mean = data.mean()
+        self.std = data.std()
+        return self
+
+    def transform(self, data: pd.DataFrame) -> pd.DataFrame:
+        data = data.copy()
+        data = (data - self.mean) / self.std
+        return data
 
 
 def build_categorical_pipeline() -> Pipeline:
@@ -33,7 +52,7 @@ def build_numerical_pipeline() -> Pipeline:
     num_pipeline = Pipeline(
         [
             ("impute", SimpleImputer(missing_values=np.nan, strategy="median")),
-            ("scale", StandardScaler()),
+            ("scale", CustomScaler()),
         ]
     )
     return num_pipeline
