@@ -34,7 +34,7 @@ def validate(input_dir: str, model_dir: str):
 
     val_data = pd.read_csv(val_path)
     X_val = val_data.drop("target", axis=1)
-    y_val = val_data["target"].values
+    y_val = val_data["target"].to_numpy()
     y_pred = model.predict(X_val)
     accuracy = accuracy_score(y_val, y_pred)
     logger.info(f"Model accuracy: {accuracy:.2f}.")

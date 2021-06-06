@@ -20,11 +20,9 @@ def split(work_dir: str, train_size: float):
         raise ValueError(f"{data_path} file not found.")
 
     data = pd.read_csv(data_path)
-
     train_data, val_data = train_test_split(
         data, train_size=train_size, stratify=data["target"],
     )
-
     train_data.to_csv(os.path.join(work_dir, "train.csv"), index=False)
     val_data.to_csv(os.path.join(work_dir, "val.csv"), index=False)
 
