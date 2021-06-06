@@ -32,9 +32,8 @@ def train(input_dir: str, output_dir: str):
     logger.info("Train model.")
     param_grid = {"C": np.logspace(-3, 3, 10)}
     logreg = LogisticRegression(multi_class="multinomial")  # cross-entropy loss
-    logreg_cv = GridSearchCV(logreg, param_grid, cv=5)  # stratified
+    logreg_cv = GridSearchCV(logreg, param_grid, cv=5)  # stratified k-folds
     logreg_cv.fit(X_train, y_train)
-
     logger.info(f"Best accuracy: {logreg_cv.best_score_:.2f}")
 
     logger.info("Save model and metrics.")
@@ -42,7 +41,6 @@ def train(input_dir: str, output_dir: str):
 
     with open(os.path.join(output_dir, "model.pkl"), "wb") as f:
         pickle.dump(logreg_cv.best_estimator_, f)
-
     with open(os.path.join(output_dir, "metrics.json"), "w") as f:
         json.dump({"accuracy": logreg_cv.best_score_}, f)
 
